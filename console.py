@@ -1,11 +1,11 @@
-#!/usr/bin/python3 
+#!/usr/bin/python3
 """Defines the HBnB console."""
 import cmd
 import re
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
-from models.user import Use
+from models.user import User
 from models.state import State
 from models.city import City
 from models.place import Place
@@ -87,8 +87,7 @@ class HBNBCommand(cmd.Cmd):
         Create a new class instance and print its id.
         """
         argl = parse(arg)
-        if len(argl) == 0
-
+        if len(argl) == 0:
             print("** class name missing **")
         elif argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -119,7 +118,7 @@ class HBNBCommand(cmd.Cmd):
 
         argl = parse(arg)
         objdict = storage.all()
-        if len(argl) == 0
+        if len(argl) == 0:
             print("** class name missing **")
         elif argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -190,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
 
         if len(argl) == 4:
             obj = objdict["{}.{}".format(argl[0], argl[1])]
-            if argl[2] in obj.__class__.__dict__.keys()
+            if argl[2] in obj.__class__.__dict__.keys():
                 valtype = type(obj.__class__.__dict__[argl[2]])
                 obj.__dict__[argl[2]] = valtype(argl[3])
             else:
@@ -205,6 +204,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     obj.__dict__[k] = v
         storage.save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
