@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 "Module for FileStorage class"
 
+
 import os
 import json
 from models.base_model import BaseModel
@@ -11,6 +12,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+
 
 class FileStorage:
     """Representation of FileStorage
