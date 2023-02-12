@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""""""
+#This file contains all the base class for all our model
 
 import models
 from uuid import uuid4
