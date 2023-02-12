@@ -7,6 +7,7 @@ from datetime import datetime
 import json
 from imp import reload
 
+
 class BaseModel:
     """Classs method which all files inherits from."""
     def __init__(self, *args, **kwargs):
@@ -27,14 +28,15 @@ class BaseModel:
 
     def __str__(self):
         "Print out: [<class name>] (<self.id>) <self.__dict__>"
-        return("[{:s}] ({:s}) {}".format(type(self).__name__, self.id, self.__dict__))
+        cls_name = type(self).__name__
+        return("[{}] ({}) {}".format(cls_name, self.id, self.__dict__))
 
     def save(self):
-        " returns a dictionary containing all keys/values of __dict__ of the instance"
+        " returns a dictionary containing all keys/values of __dict__"
         self.update_at = datetime
 
     def to_dict(self):
-        "returns a dictionary containing all keys/values of __dict__ of the instance: created_at, updated_at and class name"
+        "returns a dictionary containing all keys/values of __dict__"
         new_dict = self.__dict__.copy()
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
