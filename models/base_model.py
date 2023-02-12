@@ -34,6 +34,7 @@ class BaseModel:
     def save(self):
         " returns a dictionary containing all keys/values of __dict__"
         self.update_at = datetime
+        models.storage.save()
 
     def to_dict(self):
         "returns a dictionary containing all keys/values of __dict__"
