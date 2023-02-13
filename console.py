@@ -33,6 +33,7 @@ def parse(arg):
 
 class HBNBCommand(cmd.Cmd):
     """Defines the HolbertonBnB command interpreter.
+
     Attributes:
         prompt (str): The command prompt.
     """
@@ -114,8 +115,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
-        Delete a class istance of a given id."""
-
+        Delete a class instance of a given id."""
         argl = parse(arg)
         objdict = storage.all()
         if len(argl) == 0:
@@ -147,7 +147,7 @@ class HBNBCommand(cmd.Cmd):
             print(objl)
 
     def do_count(self, arg):
-        """Usage: count <class> or <class>.count(
+        """Usage: count <class> or <class>.count()
         Retrieve the number of instances of a given class."""
         argl = parse(arg)
         count = 0
@@ -166,7 +166,7 @@ class HBNBCommand(cmd.Cmd):
         objdict = storage.all()
 
         if len(argl) == 0:
-            print("** cass name missing **")
+            print("** class name missing **")
             return False
         if argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
