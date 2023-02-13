@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""BaseModel class object of the AirBnB clone"""
+"""BaseModel class of the AirBnB clone"""
 
 import models
 from uuid import uuid4
@@ -16,12 +16,11 @@ class BaseModel:
             *args - Unused
             **kwargs - Takes a dictionary
         """
+        time_form = "%Y-%m-%dT%H:%M:%S"
         if kwargs:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
-                    self.__dict__[key] = datetime.fromisoformat(value)
-                if (key == 'id') & (value != None):
-                    self.id = value
+                    self.__dict__[key] = datetime.strptime(value, time_form)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
