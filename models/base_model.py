@@ -7,7 +7,6 @@ from datetime import datetime
 import json
 from imp import reload
 
-
 class BaseModel:
     """Classs method which all files inherits from."""
     def __init__(self, *args, **kwargs):
@@ -16,16 +15,17 @@ class BaseModel:
             *args - Unused
             **kwargs - Takes a dictionary
         """
-        if kwargs:
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        if len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key in ["created_at", "updated_at"]:
                     self.__dict__[key] = datetime.fromisoformat(value)
-                if (key == 'id') & (value != None):
-                    self.id = value
+                else:
+                    self.__dict__[key] = value
         else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         "Print out: [<class name>] (<self.id>) <self.__dict__>"
@@ -34,7 +34,7 @@ class BaseModel:
 
     def save(self):
         " returns a dictionary containing all keys/values of __dict__"
-        self.update_at = datetime
+        self.update_at = datetime.today().isoformat()
         models.storage.save()
 
     def to_dict(self):
@@ -42,6 +42,5 @@ class BaseModel:
         new_dict = self.__dict__.copy()
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
-        new_dict["__class__"] = type(self).__name__
-
+        new_dict["__class__"] = self.__class__.__name__
         return new_dict
